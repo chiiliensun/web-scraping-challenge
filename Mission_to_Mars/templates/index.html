@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+
+    <title>Mission to Mars</title>
+  </head>
+  <body>
+
+      <!-- Title -->
+    <div class="containter-fluid jumbotron text-center">
+      <h1 class="display-4 font-weight-bold">Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">New Mars Data!</a></p>
+    </div>
+
+    <hr>
+
+    <!-- Mars News -->
+    <div class="containter-fluid text-center" id="news">
+        <h2>News from Mars!</h2>
+        <br>
+        <h4 class="heading">{{mars_dict.News_Title}}</h4>
+        <p class="text-muted">{{mars_dict.Paragraph_Text}}</p>
+    </div>
+
+    <br>
+
+    <!-- Featured Image -->
+    <div class="containter-fluid text-center">
+      <h3>Featured Image from Mars</h3>
+      <div class="text-center" id="featured_image">
+        <img src="{{mars_dict.Featured_Image_Url}}" class="img-fluid" alt="Feat Image">
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Facts Table -->
+    <div class="containter-fluid text-center">
+      <h3>Mars Facts!</h3>
+      <div class="data text-center" id="fact_table">
+          {{mars_dict.Mars_Table | safe}}
+      </div>
+    </div>
+
+    <hr>
+    <br>
+
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h2>Mars Hemispheres</h2>
+      </div>
+    </div>
+
+    <div class="row" id="hemispheres">
+      {% for hemi in mars_dict.Hemisphere_Urls %}
+      <div class="col-md-3">
+        <div class="thumbnail text-center">
+          <img src="{{hemi.hemi_url}}" class="rounded mx-auto d-block" alt="Hemispheres" width=75%">
+
+          <h4> {{hemi.Hemisphere_Title}} </h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>
