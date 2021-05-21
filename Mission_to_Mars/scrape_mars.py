@@ -88,28 +88,14 @@ def scrape ():
 
     # create lists to hold Save both the image url string for the full resolution hemisphere image, and the Hemisphere
     # title containing the hemisphere name. Use a Python dictionary to store the data using the keys img_url and title.
-    hemispheres_titles = []
     all_urls = []
 
     # find the hemisphere titles
     hemispheres = hemisphere_soup.find_all("div", class_="item")
-    # for hemi in hemispheres:
-    #     hemispheres_titles.append(hemi.text)
 
     # Loop throught to meet all requirements
-    print('hit for')
     for hemis in hemispheres:
-        print('looping')
         browser.visit(hemisphere_url)
-        # Click each of the links to the hemispheres in order to find the image url
-        # browser.links.find_by_partial_text(hemis).click()
-        # hemisphere_html = browser.html
-        # hemisphere_soup = bs(hemisphere_html, "html.parser")
-        # # Set variable and find the image links
-        # title = hemisphere_soup.find("h2", class_="title").text
-        # print(title)
-        # img_url = hemisphere_soup.find("img", class_="wide-image")["scr"]
-        # print(img_url)
         title = hemis.find("h3").text
         print(title)
         img_url = hemis.find("img")['src']
@@ -119,10 +105,6 @@ def scrape ():
             'title':title,
             'hemi_url': hemis_webpage_url + img_url
         }
-        # Store the data using the keys img_url and title
-        # hold_images["Hemisphere_Title"]=hemispheres_titles
-        # hold_images["Url"]=imgs
-        # Append the dictionary with the image url string and the hemisphere title to a list
         all_urls.append(hold_images)
 
         # move the print statements into dictionary created before scrape function
@@ -130,7 +112,6 @@ def scrape ():
 
     browser.quit()
 
-    print(all_urls)
     return mars_dict
 
 if __name__ == '__main__':
